@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <!--Import jQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--Smooth Scroll-->
+        <script>
+            $(document).ready(function(){
+              // Add smooth scrolling to all links
+              $("a").on('click', function(event) {
+            
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                  // Prevent default anchor click behavior
+                  event.preventDefault();
+            
+                  // Store hash
+                  var hash = this.hash;
+            
+                  // Using jQuery's animate() method to add smooth page scroll
+                  // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                  $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                  }, 800, function(){
+               
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                  });
+                } // End if
+              });
+            });
+            </script>
+        <title>Persistent History</title>
+        <!--Import Fonts-->
+        <style type = "text/css">
+          @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Oswald:200,300,400,500,600,700|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Slabo+27px');            
+            @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+            @import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800');
+        </style>
+        <!--Import CSS-->
+        <link rel = "stylesheet" type = "text/css" href = "OnScroll/css/animations.css">
+        <style type = "text/css">
+            head,body,html { height: 100%; }
+            body {
+                margin: 0px;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+            #video-wrapper {
+                min-height: 100%;
+                min-width: 100%;
+                height: auto;
+                width: auto;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: -100;
+            }
+            #main-header {
+                font-family: "Dosis";
+                font-weight: 300;
+                color: white;
+                text-shadow: 3px 3px 3px rgba(0,0,0,0.3);
+                font-size: 56px;
+                margin-left: 60px;
+                margin-top: 3%;
+            }
+            #main-subtitle {
+                font-family: "Raleway";
+                font-weight: 300;
+                color: white;
+                text-shadow: 3px 3px 3px rgba(0,0,0,0.3);
+                font-size: 24px;
+                margin-left: 60px;
+            }
+            
+            /*--Hub Entry--*/
+            #entries {
+                position: absolute;
+                margin-left: 6%;
+            }
+            #entries-2 {
+                position: absolute;
+                margin-top: 0.4%;
+                margin-left: 30%;
+            }
+            #entries-3 {
+                position: absolute;
+                margin-left: 60%;
+            }
+            #main-icon {
+                border-radius: 50%;
+                min-height: 40px;
+                min-width: 40px;
+                height: 40px;
+                max-height: 40px;
+                width: 40px;
+                max-width: 40px;              
+            }
+            #main-icon:hover,#announcements-entry:hover,#forums-entry:hover,#rules-entry:hover,#guide-entry:hover,#dynmap-entry:hover,#shop-entry:hover,#helper-entry:hover,#gallery-entry:hover,#assassination-entry:hover,#support-entry:hover,#wiki-entry:hover {
+                cursor: pointer;
+            }
+            #main-text {
+                position: relative;
+                left: 1%;
+                bottom: 2%;
+                font-family: "Raleway";
+                font-weight: 300;
+                color: white;
+                text-shadow: 3px 3px 3px rgba(0,0,0,0.3);
+                font-size: 24px;            
+            }
+            @keyframes entry {
+                from {
+                    margin-left: 0px;
+                }
+                to {
+                    margin-left: 60px;
+                }
+            }
+            @keyframes exit {
+                from {
+                    margin-left: 60px;
+                }
+                to {
+                    margin-left: 0px;
+                }
+            }
+            #announcements-entry,#forums-entry,#rules-entry,#guide-entry,#dynmap-entry,#shop-entry,#helper-entry,#gallery-entry,#assassination-entry,#support-entry,#wiki-entry {
+                padding: 10px;
+            }
+            #announcements-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #announcements-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #forums-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #forums-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #rules-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #rules-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #guide-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #guide-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #dynmap-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #dynmap-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #shop-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #shop-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #helper-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #helper-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #gallery-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #gallery-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #assassination-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #assassination-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #support-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #support-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+            #wiki-entry:hover {
+                animation: entry 2s forwards;
+            }
+            #wiki-entry:not(:hover) {
+                animation: exit 2s forwards;
+            }
+        </style>
+        <!--Sector CSS-->
+        <style type = "text/css">
+            #announcementsSection {
+                position: absolute;
+                top: 100%;
+                width: 100%;
+                height: 100%;
+                background-image: url("https://wallpaperbrowse.com/media/images/Background-4.jpg") !important;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #announcements-box {
+                background-color: white;
+                position: relative;
+                top: 5%;
+                left: 20%;
+                width: 60%;
+                height: 90%;
+                box-shadow: 1px 0px 60px 3px rgba(0,0,0,0.75);
+            }
+            #announcements-title {
+                font-family: "Montserrat";
+                font-weight: 700;
+                color: rgba(0,0,0,0.83);
+                font-size: 30px;
+                margin-left: 40px;
+                margin-top: 1%;
+                padding-right: 5%;
+            }
+            #announcements-rule {
+                margin-left: 40px;
+                margin-right: 20px;
+            }
+            #announcements-content {
+                font-family: "Raleway";
+                font-weight: 300;
+                color: rgba(0,0,0,0.83);
+                font-size: 22px;
+                margin-top: 2%;
+                margin-left: 45px;
+                height: 70%;
+                overflow-y: auto;
+                margin-right: 1%;
+            }
+            #announcements-content::-webkit-scrollbar {
+                width: 1%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.0000000000000000001);
+            }
+            #announcements-content::-webkit-scrollbar-thumb {
+                width: 1%;
+                height: 5%;
+                background-color: rgba(150,150,150,0.3);
+                border-radius: 5px;
+            }
+            @keyframes scrollbar-hover {
+                from {
+                    border-radius: 5px;
+                    background-color: rgb(150,150,150);
+                }
+                to {
+                    border-radius: 0px;
+                    background-color: rgb(100,100,100);
+                }
+            }
+            @keyframes scrollbar-reverse-hover {
+                from {
+                    border-radius: 0px;
+                    background-color: rgb(100,100,100);
+                }
+                to {
+                    border-radius: 5px;
+                    background-color: rgb(150,150,150);
+                    cursor: pointer;
+                }
+            }
+            #announcements-content::-webkit-scrollbar-thumb:vertical:hover {
+                animation: scrollbar-reverse-hover 2s forwards;
+            }
+            #announcements-content::-webkit-scrollbar-thumb:vertical:not(:hover) {
+                animation: scrollbar-hover 2s forwards;
+            }
+            #buttons-container {
+                position: absolute;
+                top: 82%;
+                height: 100%;
+                left: 40px;
+            }
+            #announcements-button {
+                min-width: 10%;
+                border: 2px solid gray;
+                font-family: "Raleway";
+                color: gray;
+                font-size: 24px;
+                text-shadow: 3px 3px 3px rgba(0,0,0,0.3);
+                max-height: 10%;
+                border-radius: 40px;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                background-color: rgba(0,0,0,0.0000000001);
+                margin-top: 1%;
+                margin-left: 10px;
+            }
+            @keyframes button-hover {
+                from {
+                    background-color: rgba(0,0,0,0.000000001);
+                    color: gray;
+                    cursor: pointer;
+                }
+                to {
+                    background-color: gray;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+            @keyframes button-reverse-hover {
+                from {
+                    background-color: gray;
+                    color: white;
+                }
+                to {
+                    background-color: rgba(0,0,0,0.000000001);
+                    color: gray;
+                }
+            }
+            #announcements-button:hover {
+                animation: button-hover 2s forwards;
+            }
+            #announcements-button:not(:hover) {
+                animation: button-reverse-hover 2s forwards;
+            }
+            #announcements-button img {
+                position: relative;
+                bottom: 0.4% !important;
+            }
+            #announcements-date {
+                font-family: "Roboto";
+                color: rgba(0,0,0,0.83);
+                font-size: 24px;
+                font-weight: 300;
+                margin-left: 40px;
+                padding-bottom: 1%;
+            }
+        </style>
+    </head>
+    <body>
+        <a id = "home" style = "position: absolute; top: -10%;"></a>
+        <video width = "100%" height = "100%" id = "video-wrapper" autoplay loop>
+            <source src="main_background.mp4">
+        </video>
+        <div class='animatedParent'>
+        	<div class='animated fadeInLeftShort' id = "main-header">Persistent History</div>
+        	<div id = "main-subtitle" class = 'animated fadeInLeftShort delay-250'>Minecraft with a historical twist.</div>
+        	<div id = "entries">
+            	<div id = 'announcements-entry'>
+            	    <a href = "#announcements" style = "text-decoration: none;">
+                	    <img src = "http://www.iconarchive.com/download/i86992/graphicloads/colorful-long-shadow/Announcement.ico" style = "margin-top: 2%;" id = "main-icon" class = 'animated fadeInLeftShort delay-500'>
+                	    <span id = "main-text" class = 'animated fadeInLeftShort delay-500'>Announcements</span>
+            	    </a>
+            	</div>
+            	<div id = 'forums-entry'>
+            	    <img src = "http://capindus.com/wp-content/uploads/2015/02/Icon-Forum.png" id = "main-icon" class = 'animated fadeInLeftShort delay-600'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-600'>
+            	        Forums
+            	    </span>
+            	</div>
+            	<div id = 'rules-entry'>
+            	    <img src = "http://www.iconarchive.com/download/i75808/martz90/circle/books.ico" id = "main-icon" class = 'animated fadeInLeftShort delay-700'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-700'>
+            	        Rules
+            	    </span>
+            	</div>
+            	<div id = 'guide-entry'>
+            	    <img src = "https://freeiconshop.com/wp-content/uploads/edd/book-open-flat.png" id = "main-icon" class = 'animated fadeInLeftShort delay-800'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-800'>
+            	        Guide
+            	    </span>
+            	</div>
+        	</div>
+        	<div id = "entries-2">
+        	    <div id = 'dynmap-entry'>
+            	    <img src = "https://housing.umn.edu/sites/housing.umn.edu/files/map_parking_icon-01.png" id = "main-icon" class = 'animated fadeInLeftShort delay-900'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-900'>
+            	        Dynmap
+            	    </span>
+            	</div>
+            	<div id = 'shop-entry'>
+            	    <img src = "http://www.freeiconspng.com/uploads/money-icon-29.png" id = "main-icon" class = 'animated fadeInLeftShort delay-1000'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-1000'>
+            	        Donate
+            	    </span>
+            	</div>
+            	<div id = 'helper-entry'>
+            	    <img src = "http://www.iconarchive.com/download/i87461/graphicloads/medical-health/hand.ico" id = "main-icon" class = 'animated fadeInLeftShort delay-1100'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-1100'>
+            	        Helper App
+            	    </span>
+            	</div>
+            	<div id = 'gallery-entry'>
+            	    <img src = "http://icons.iconarchive.com/icons/vcferreira/firefox-os/256/gallery-icon.png" id = "main-icon" class = 'animated fadeInLeftShort delay-1200'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-1200'>
+            	        Gallery
+            	    </span>
+            	</div>
+        	</div>
+        	<div id = "entries-3">
+        	    <div id = 'assassination-entry'>
+            	    <img src = "http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Drop-icon.png" id = "main-icon" class = 'animated fadeInLeftShort delay-1300'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-1300'>
+            	        Assassination App
+            	    </span>
+            	</div>
+            	<div id = 'support-entry'>
+            	    <img src = "http://www.iconarchive.com/download/i86026/graphicloads/100-flat-2/arrow-up.ico" id = "main-icon" class = 'animated fadeInLeftShort delay-1400'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-1400'>
+            	        Support
+            	    </span>
+            	</div>
+            	<div id = 'wiki-entry'>
+            	    <img src = "http://sharepointmaven.com/wp-content/uploads/2016/11/wiki-icon.png" id = "main-icon" class = 'animated fadeInLeftShort delay-1500'>
+            	    <span id = "main-text" class = 'animated fadeInLeftShort delay-1500'>
+            	        Wiki
+            	    </span>
+            	</div>
+        	</div>
+        </div>
+        <div class = 'animatedParent' id = 'announcementsSection'>
+            <a id = 'announcements'></a>
+            <div id = 'announcements-box'>
+                &nbsp;
+                <div id = 'announcements-title'></div>
+                <div id = 'announcements-date'></div>
+                <div id = '' style = 'height: 1px; margin-left: 80px; margin-right: 80%; background-color: gray;'></div>
+                <div id = 'announcements-content'></div>
+                <div id = 'buttons-container'>
+                    <a href = "#home" id = "announcements-button" style = "text-decoration: none;">
+                        <img src = "https://maxcdn.icons8.com/Share/icon/p1em/Very_Basic//home1600.png" height = "20" width = "20" style = "position: relative; top: 2px;">
+                        Home
+                    </a>
+                    <button onclick = "" id = "announcements-button">
+                        <img src = "https://maxcdn.icons8.com/Share/icon/ios7/Arrows//back1600.png" height = "20" width = "20" style = "position: relative; top: 2px;">
+                        Previous
+                    </button>
+                    <button onclick = "" id = "announcements-button">
+                        <img src = "https://png.icons8.com/forward/win10/1600" height = "20" width = "20" style = "position: relative; top: 2px;">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script type = "text/javascript">
+            var announcements = {
+                page: 0,
+            }
+            function $newAnnouncement (page,title,date,content) {
+                if (announcements.page === page) {
+                    document.getElementById('announcements-title').innerHTML = "<div id = 'announcements-title' class = 'animated bounceInLeftShort'>" + title + '</div>'
+                    document.getElementById('announcements-date').innerHTML = "<div id = 'announcements-date' class = 'animated bounceInLeftShort'>" + date + '</div>'
+                    document.getElementById('announcements-content').innerHTML = "<div id = 'announcements-content' class = 'animated bounceInLeftShort'>" + content + '</div>';
+                }
+            }
+                $newAnnouncement(0,"New Website Released!","July 19, 2017",
+                ["Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet Lorem Ipsum Sit Amet"]
+                );
+        </script>
+        <script src = "OnScroll/js/css3-animate-it.js">
+        </script>
+    </body>
+</html>
